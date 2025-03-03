@@ -1,2 +1,2 @@
 # 444-project-1
-Group project for COSC 444 Introduction to Parllel Computing. Authors: Jonathan, Abigail, Alex, Evan
+Group project for COSC 444 Introduction to Parallel Computing. Authors: Jonathan, Abbagail, Alex, Evan
