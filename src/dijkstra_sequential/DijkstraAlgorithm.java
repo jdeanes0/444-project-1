@@ -1,3 +1,5 @@
+package dijkstra_sequential;
+
 import java.util.Arrays;
 
 public class DijkstraAlgorithm {
