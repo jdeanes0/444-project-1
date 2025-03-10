@@ -1,5 +1,6 @@
 package dijkstra_sequential;
-
+// this program is a sequential implementation of Dijkstra's algorithm
+// it finds the shortest path from a source node to all other nodes in a graph
 import java.util.Arrays;
 
 public class DijkstraAlgorithm {
