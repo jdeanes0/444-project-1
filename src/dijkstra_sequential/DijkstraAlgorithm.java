@@ -89,12 +89,16 @@ public class DijkstraAlgorithm {
 
     public static void main(String[] args) {
         int[][] graph = {
-            {0, 10, 1, 0, 0, 5},  // Vertex 0 is connected to Vertex 1 with weight 10
-            {10, 1, 5, 0, 0, 0},  // Vertex 1 is connected to Vertex 0 with weight 10, and Vertex 2 with weight 5
-            {0, 5, 1, 1, 0, 0},  // Vertex 2 is connected to Vertex 1 with weight 5, and Vertex 3 with weight 1
-            {0, 1, 20, 0, 10, 0},  // Vertex 3 is connected to Vertex 2 with weight 20, and Vertex 4 with weight 10
-            {0, 0, 0, 10, 0, 5},  // Vertex 4 is connected to Vertex 3 with weight 10, and Vertex 5 with weight 5
-            {0, 0, 0, 0, 5, 0}    // Vertex 5 is connected to Vertex 4 with weight 5
+            {0, 10, 1, 5, 9, 2, 0, 0, 7, 6},  // Expanded test case
+            {10, 0, 4, 0, 0, 8, 3, 0, 0, 0},  
+            {1, 4, 0, 6, 0, 3, 0, 7, 0, 5},  
+            {5, 0, 6, 0, 2, 0, 4, 0, 9, 0},  
+            {9, 0, 0, 2, 0, 0, 0, 8, 0, 3},  
+            {2, 8, 3, 0, 0, 0, 5, 0, 4, 0},  
+            {0, 3, 0, 4, 0, 5, 0, 2, 0, 1},  
+            {0, 0, 7, 0, 8, 0, 2, 0, 6, 0},  
+            {7, 0, 0, 9, 0, 4, 0, 6, 0, 2},  
+            {6, 0, 5, 0, 3, 0, 1, 0, 2, 0}   
         };
 
         int source = 0;
