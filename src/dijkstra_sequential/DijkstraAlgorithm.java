@@ -23,12 +23,7 @@ public class DijkstraAlgorithm {
         long startTotalTime = System.nanoTime(); // Start timing each jump
         // Find the shortest path for all vertices
         for (int count = 0; count < n - 1; count++) {
-            long startTime = System.nanoTime(); // Start timing each jump
             int u = minDistance(distance, visited);
-            long endTime = System.nanoTime(); // End timing
-            long duration = endTime - startTime; // Calculate duration
-            System.out.println("Time taken for jump " + (count + 1) + ": " + duration + " nanoseconds"); // Print time taken
-            System.out.println("Node - " + count); // Print time taken
             visited[u] = true;
 
             // Update the distance of the adjacent vertices of the picked vertex
