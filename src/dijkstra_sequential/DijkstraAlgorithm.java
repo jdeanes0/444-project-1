@@ -2,6 +2,7 @@ package dijkstra_sequential;
 // This program is a sequential implementation of Dijkstra's algorithm
 // It finds the shortest path from a source node to all other nodes in a graph
 import java.util.Arrays;
+import java.util.Random;
 import java.util.Stack;
 
 public class DijkstraAlgorithm {
@@ -84,6 +85,23 @@ public class DijkstraAlgorithm {
     }
 
     public static void main(String[] args) {
+        int size = 50;
+        int[][] graph = new int[size][size];
+        Random rand = new Random();
+
+        // Generate a random weighted adjacency matrix
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                if (i != j) {
+                    graph[i][j] = rand.nextInt(20) + 1; // Random weights between 1 and 20
+                }
+            }
+        }
+
+        int source = 0;
+
+
+        /*
         int[][] graph = {
             {0, 10, 1, 5, 9, 2, 0, 0, 7, 6},  // Expanded test case
             {10, 0, 4, 0, 0, 8, 3, 0, 0, 0},  
@@ -96,9 +114,7 @@ public class DijkstraAlgorithm {
             {7, 0, 0, 9, 0, 4, 0, 6, 0, 2},  
             {6, 0, 5, 0, 3, 0, 1, 0, 2, 0}   
         };
-
-        int source = 0;
-        
+        */        
         // Run Dijkstra's algorithm to find the shortest paths from the source to all other vertices
         dijkstra(graph, source);
     }
