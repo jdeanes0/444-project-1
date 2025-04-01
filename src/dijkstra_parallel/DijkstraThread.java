@@ -15,9 +15,22 @@ public class DijkstraThread extends Thread {
     }
 
     public void run() {
+    	long startTime = System.nanoTime(); // Start timing each iteration (jump) //<<<<
+    	//System.out.println(startTime + "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+    	int count = Driver.threadCount;
+    	long threadStartTime = System.nanoTime(); //<<<<<
         if (dist[u] + graph[u][neighbor] < dist[neighbor]) {
+        	//System.out.println("Updating distance via edge (" + u + " -> " + neighbor + ")"); //<<<<< Debugging
             dist[neighbor] = dist[u] + graph[u][neighbor];
         }
+        long threadEndTime = System.nanoTime(); //<<<<<
+        long threadDuration = threadEndTime - threadStartTime; //<<<<<
+        System.out.println("Thread " + count + " for edge (" + u + " -> " + neighbor + ") took " + threadDuration + " nanoseconds."); //<<<<<
+        long endTime = System.nanoTime(); // End timing this iteration (jump) //<<<<
+    	//System.out.println(startTime + "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+    	//System.out.println(endTime + "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<E");
+        long duration = endTime - startTime; // Calculate duration //<<<<
+        System.out.println("Time taken in total = " + duration + " nanoseconds"); //<<<<
     }
 
 }
