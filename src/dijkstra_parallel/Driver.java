@@ -37,29 +37,21 @@ public class Driver {
         Arrays.fill(dist, INF);
         dist[source] = 0;
 
+        List<Thread> threads = new ArrayList<>();
+
         // Process nodes one by one
         for (int count = 0; count < numVertices; count++) {
-            int u = minDistance(dist, visited);
-            visited[u] = true;
+            Thread t = new DijkstraThread(visited, dist, graph);
+            threads.add(t);  // Add the thread to the list
+            t.start();  // Start the thread
+        }
 
-            List<Thread> threads = new ArrayList<>();  // To hold all threads for current node
-
-            // Start a thread for each unvisited neighbor of node u
-            for (int v = 0; v < numVertices; v++) {
-                if (graph[u][v] != 0 && dist[u] != INF && !visited[v]) {
-                    Thread t = new DijkstraThread(u, v, dist, graph);
-                    threads.add(t);  // Add the thread to the list
-                    t.start();  // Start the thread
-                }
-            }
-
-            // Wait for all threads to finish before moving to the next node
-            for (Thread t : threads) {
-                try {
-                    t.join();  // Wait for each thread to finish
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                }
+        // Wait for all threads to finish before moving on
+        for (Thread t : threads) {
+            try {
+                t.join();  // Wait for each thread to finish
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
             }
         }
 
@@ -68,17 +60,4 @@ public class Driver {
             System.out.println("Node " + i + ": " + (dist[i] == INF ? "INF" : dist[i]));
         }
     }
-
-    private static int minDistance(int[] distance, boolean[] visited) {
-        int min = INF, minIndex = -1;
-
-        for (int v = 0; v < distance.length; v++) {
-            if (!visited[v] && distance[v] <= min) {
-                min = distance[v];
-                minIndex = v;
-            }
-        }
-        return minIndex;
-    }
-
 }
