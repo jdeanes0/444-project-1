@@ -35,9 +35,10 @@ public class DijkstraThread extends Thread {
                 }
             }
         }
+
         long threadEndTime = System.nanoTime(); //<<<<<
         long threadDuration = threadEndTime - threadStartTime; //<<<<<
-        System.out.println("Thread " + count + " for edge (" + u + " -> " + neighbor + ") took " + threadDuration + " nanoseconds."); //<<<<<
+//        System.out.println("Thread " + count + " for edge (" + u + " -> " + neighbor + ") took " + threadDuration + " nanoseconds."); //<<<<<
         long endTime = System.nanoTime(); // End timing this iteration (jump) //<<<<
     	//System.out.println(startTime + "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
     	//System.out.println(endTime + "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<E");
