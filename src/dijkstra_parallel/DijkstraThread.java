@@ -8,14 +8,13 @@ public class DijkstraThread extends Thread {
     private int[] dist;
     private boolean[] visited;
     private final int[][] graph;
-    private Map<Integer, Integer> previous;
 
     // Constructor to initialize the necessary parameters
-    public DijkstraThread(boolean[] visited, int[] dist, int[][] graph, Map<Integer, Integer> previous) {
+    public DijkstraThread(boolean[] visited, int[] dist, int[][] graph) {
         this.visited = visited;
         this.dist = dist;
         this.graph = graph;
-        this.previous = previous;
+        // this.previous = previous;
     }
 
     public void run() {
@@ -28,8 +27,8 @@ public class DijkstraThread extends Thread {
         // Start a thread for each unvisited neighbor of node u
         for (int v = 0; v < graph.length; v++) {
             if (graph[u][v] != 0 && dist[u] != INF && !visited[v]) {
-                System.out.print("");
-                previous.put(u,v);
+                // System.out.print("");
+                // previous.put(u,v);
                 if (dist[u] + graph[u][v] < dist[v]) {
                     dist[v] = dist[u] + graph[u][v];
                 }
