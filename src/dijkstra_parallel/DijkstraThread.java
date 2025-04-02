@@ -20,8 +20,8 @@ public class DijkstraThread extends Thread {
 
     public void run() {
         long startTime = System.nanoTime();
-        int count = Driver.threadCount;
-        long threadStartTime = System.nanoTime();
+        //int count = Driver.threadCount;
+        //long threadStartTime = System.nanoTime();
 
         int u = minDistance(dist, visited);
         visited[u] = true;
@@ -36,14 +36,14 @@ public class DijkstraThread extends Thread {
             }
         }
 
-        long threadEndTime = System.nanoTime(); //<<<<<
-        long threadDuration = threadEndTime - threadStartTime; //<<<<<
-//        System.out.println("Thread " + count + " for edge (" + u + " -> " + neighbor + ") took " + threadDuration + " nanoseconds."); //<<<<<
+        //long threadEndTime = System.nanoTime(); //<<<<<
+        //long threadDuration = threadEndTime - threadStartTime; //<<<<<
+        //System.out.println("Thread " + count + " for edge (" + u + " -> " + neighbor + ") took " + threadDuration + " nanoseconds."); //<<<<<
         long endTime = System.nanoTime(); // End timing this iteration (jump) //<<<<
     	//System.out.println(startTime + "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
     	//System.out.println(endTime + "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<E");
         long duration = endTime - startTime; // Calculate duration //<<<<
-        System.out.println("Time taken in total = " + duration + " nanoseconds"); //<<<<
+        //System.out.println("Time taken in total = " + duration + " nanoseconds");
     }
 
     private static int minDistance(int[] distance, boolean[] visited) {

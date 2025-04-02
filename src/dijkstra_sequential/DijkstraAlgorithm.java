@@ -36,8 +36,8 @@ public class DijkstraAlgorithm {
                 }
             }
         }
-        long endTotalTime = System.nanoTime(); // Start timing each jump
-        System.out.println("Total time: " + (endTotalTime - startTotalTime));
+        //long endTotalTime = System.nanoTime(); // Start timing each jump
+        //System.out.println("Total time: " + (endTotalTime - startTotalTime));
         printSolution(distance, previous);
     }
 
@@ -85,10 +85,11 @@ public class DijkstraAlgorithm {
     }
 
     public static void main(String[] args) {
-        int size = 50;
+/*
+        int size = 1000;
         int[][] graph = new int[size][size];
         Random rand = new Random();
-
+        
         // Generate a random weighted adjacency matrix
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
@@ -99,23 +100,38 @@ public class DijkstraAlgorithm {
         }
 
         int source = 0;
-
-
-        /*
+*/
         int[][] graph = {
-            {0, 10, 1, 5, 9, 2, 0, 0, 7, 6},  // Expanded test case
-            {10, 0, 4, 0, 0, 8, 3, 0, 0, 0},  
-            {1, 4, 0, 6, 0, 3, 0, 7, 0, 5},  
-            {5, 0, 6, 0, 2, 0, 4, 0, 9, 0},  
-            {9, 0, 0, 2, 0, 0, 0, 8, 0, 3},  
-            {2, 8, 3, 0, 0, 0, 5, 0, 4, 0},  
-            {0, 3, 0, 4, 0, 5, 0, 2, 0, 1},  
-            {0, 0, 7, 0, 8, 0, 2, 0, 6, 0},  
-            {7, 0, 0, 9, 0, 4, 0, 6, 0, 2},  
-            {6, 0, 5, 0, 3, 0, 1, 0, 2, 0}   
-        };
-        */        
+    {0, 18, 14, 7, 1, 16, 15, 13, 14, 12, 6, 17, 9, 11, 19, 3, 20, 20, 6, 7},
+    {3, 0, 3, 6, 3, 6, 11, 18, 1, 3, 6, 6, 11, 10, 13, 12, 10, 5, 6, 19},
+    {4, 6, 0, 3, 4, 11, 3, 17, 15, 4, 5, 6, 9, 8, 7, 15, 5, 12, 5, 19},
+    {1, 12, 14, 0, 2, 3, 17, 3, 5, 6, 13, 13, 9, 20, 10, 8, 10, 18, 9, 18},
+    {7, 9, 14, 14, 0, 15, 17, 1, 4, 9, 9, 8, 18, 4, 20, 7, 2, 3, 7, 18},
+    {1, 11, 6, 8, 4, 0, 6, 11, 16, 4, 19, 15, 5, 18, 7, 18, 18, 15, 4, 12},
+    {10, 4, 4, 14, 2, 19, 0, 4, 20, 10, 5, 11, 14, 18, 11, 19, 20, 3, 15, 9},
+    {20, 16, 17, 19, 19, 10, 5, 0, 16, 1, 2, 20, 4, 1, 13, 1, 3, 2, 2, 13},
+    {11, 16, 20, 3, 11, 16, 4, 5, 0, 18, 15, 17, 19, 2, 15, 2, 3, 12, 3, 5},
+    {8, 2, 4, 4, 14, 12, 10, 18, 5, 0, 14, 19, 13, 18, 12, 7, 2, 13, 4, 3},
+    {13, 15, 13, 11, 8, 9, 6, 5, 17, 19, 0, 11, 14, 4, 14, 15, 9, 2, 2, 8},
+    {3, 20, 6, 18, 17, 6, 13, 13, 12, 15, 8, 0, 9, 2, 11, 11, 15, 4, 18, 10},
+    {13, 15, 4, 5, 17, 15, 9, 15, 19, 13, 15, 17, 0, 13, 3, 5, 11, 19, 3, 7},
+    {1, 17, 12, 14, 2, 9, 11, 2, 1, 3, 9, 1, 16, 0, 8, 19, 4, 8, 1, 14},
+    {6, 7, 16, 4, 3, 14, 2, 5, 18, 6, 7, 16, 12, 6, 0, 2, 2, 13, 6, 13},
+    {19, 11, 17, 9, 16, 19, 7, 14, 7, 16, 5, 4, 1, 20, 7, 0, 13, 15, 17, 4},
+    {1, 19, 4, 5, 19, 19, 3, 15, 5, 5, 17, 1, 20, 17, 7, 4, 0, 11, 11, 4},
+    {2, 19, 17, 13, 1, 1, 9, 2, 6, 2, 4, 16, 14, 20, 17, 12, 4, 0, 15, 15},
+    {17, 6, 20, 5, 16, 19, 9, 15, 17, 9, 11, 13, 18, 16, 13, 9, 10, 12, 0, 18},
+    {12, 2, 6, 4, 13, 11, 20, 18, 10, 3, 9, 17, 19, 19, 4, 3, 1, 18, 14, 0}
+    };
+    
+        int source = 0;
+
+        long startTotalTime = System.nanoTime();
+
         // Run Dijkstra's algorithm to find the shortest paths from the source to all other vertices
         dijkstra(graph, source);
+
+        long endTotalTime = System.nanoTime();
+        System.out.println("Total time: " + (endTotalTime - startTotalTime)+ " nanoseconds");
     }
 }
