@@ -1,31 +1,44 @@
 package dijkstra_parallel;
 
+import java.util.Map;
+
 public class DijkstraThread extends Thread {
-    private final int u;
-    private final int neighbor;
-    private final int[] dist;
+    static final int INF = Integer.MAX_VALUE;
+
+    private int[] dist;
+    private boolean[] visited;
     private final int[][] graph;
+    private Map<Integer, Integer> previous;
 
     // Constructor to initialize the necessary parameters
-    public DijkstraThread(int u, int neighbor, int[] dist, int[][] graph) {
-        this.u = u;
-        this.neighbor = neighbor;
+    public DijkstraThread(boolean[] visited, int[] dist, int[][] graph, Map<Integer, Integer> previous) {
+        this.visited = visited;
         this.dist = dist;
         this.graph = graph;
+        this.previous = previous;
     }
 
     public void run() {
-    	long startTime = System.nanoTime(); // Start timing each iteration (jump) //<<<<
-    	//System.out.println(startTime + "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
-    	int count = Driver.threadCount;
-    	long threadStartTime = System.nanoTime(); //<<<<<
-        if (dist[u] + graph[u][neighbor] < dist[neighbor]) {
-        	//System.out.println("Updating distance via edge (" + u + " -> " + neighbor + ")"); //<<<<< Debugging
-            dist[neighbor] = dist[u] + graph[u][neighbor];
+        long startTime = System.nanoTime();
+        int count = Driver.threadCount;
+        long threadStartTime = System.nanoTime();
+
+        int u = minDistance(dist, visited);
+        visited[u] = true;
+
+        // Start a thread for each unvisited neighbor of node u
+        for (int v = 0; v < graph.length; v++) {
+            if (graph[u][v] != 0 && dist[u] != INF && !visited[v]) {
+                previous.put(u,v);
+                if (dist[u] + graph[u][v] < dist[v]) {
+                    dist[v] = dist[u] + graph[u][v];
+                }
+            }
         }
+
         long threadEndTime = System.nanoTime(); //<<<<<
         long threadDuration = threadEndTime - threadStartTime; //<<<<<
-        System.out.println("Thread " + count + " for edge (" + u + " -> " + neighbor + ") took " + threadDuration + " nanoseconds."); //<<<<<
+//        System.out.println("Thread " + count + " for edge (" + u + " -> " + neighbor + ") took " + threadDuration + " nanoseconds."); //<<<<<
         long endTime = System.nanoTime(); // End timing this iteration (jump) //<<<<
     	//System.out.println(startTime + "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
     	//System.out.println(endTime + "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<E");
@@ -33,4 +46,15 @@ public class DijkstraThread extends Thread {
         System.out.println("Time taken in total = " + duration + " nanoseconds"); //<<<<
     }
 
+    private static int minDistance(int[] distance, boolean[] visited) {
+        int min = INF, minIndex = -1;
+
+        for (int v = 0; v < distance.length; v++) {
+            if (!visited[v] && distance[v] <= min) {
+                min = distance[v];
+                minIndex = v;
+            }
+        }
+        return minIndex;
+    }
 }
