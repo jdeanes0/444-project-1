@@ -24,17 +24,19 @@ public class DijkstraThread extends Thread {
         //long threadStartTime = System.nanoTime();
 
         int u = minDistance(dist, visited);
-        visited[u] = true;
-
+        
         // Start a thread for each unvisited neighbor of node u
         for (int v = 0; v < graph.length; v++) {
             if (graph[u][v] != 0 && dist[u] != INF && !visited[v]) {
+                System.out.print("");
                 previous.put(u,v);
                 if (dist[u] + graph[u][v] < dist[v]) {
                     dist[v] = dist[u] + graph[u][v];
                 }
             }
         }
+
+        visited[u] = true;
 
         //long threadEndTime = System.nanoTime(); //<<<<<
         //long threadDuration = threadEndTime - threadStartTime; //<<<<<
